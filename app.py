@@ -3,6 +3,7 @@ from flask_cors import CORS
 from pymongo import MongoClient
 from datetime import datetime,timezone
 from bson import ObjectId
+import certifi
 import ssl
 
 app = Flask(__name__)
@@ -12,13 +13,20 @@ CORS(app)
 # Disable SSL certificate verification for development (use with caution)
 client = MongoClient(
     "mongodb+srv://vaishnavipithal_db_user:vaishnavi123@cluster0.1qcsetk.mongodb.net/?appName=Cluster0",
-    tlsAllowInvalidCertificates=True,
-    tlsAllowInvalidHostnames=True,
-    serverSelectionTimeoutMS=5000
+    tls=True,
+    tlsCAFile=certifi.where(),
+    serverSelectionTimeoutMS=10000
 )
+
 db = client.smart_irrigation
 state_col = db.system_state
 readings_col = db.sensor_readings
+try:
+    client.admin.command("ping")
+    print("MongoDB ping OK")
+except Exception as e:
+    print("MongoDB ping failed:", repr(e))
+
 
 def serialize_state(doc):
     if not doc:
