@@ -64,6 +64,12 @@ def get_state_doc():
         doc = state_col.find_one()
     return doc
 
+@app.route("/debug/ssl")
+def debug_ssl():
+    import sys, ssl
+    return {"python": sys.version, "openssl": ssl.OPENSSL_VERSION}
+
+
 @app.route("/api/status", methods=["GET"])
 def status():
     try:
