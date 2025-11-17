@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Smart Irrigation API",
+    "version": "1.0.0",
+    "description": "Simple API for Smart Irrigation System (for FlutterFlow demo)"
+  },
+  "paths": {
+    "/api/status": {
+      "get": {
+        "summary": "Get System Status",
+        "responses": {
+          "200": {
+            "description": "System status details",
+            "content": {
+              "application/json": {
+                "example": {
+                  "motor_status": false,
+                  "current_mode": "Auto",
+                  "average_soil_humidity": 61.3,
+                  "valve_1_status": true,
+                  "valve_2_status": false,
+                  "valve_3_status": true,
+                  "last_reading_time": "2025-11-03T09:45:00Z",
+                  "last_command_time": "2025-11-03T09:30:00Z",
+                  "s1_limit_high": 80,
+                  "s1_limit_low": 30
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/send-command": {
+      "post": {
+        "summary": "Send Command to Control Motor",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "motor_status": true,
+                "mode": "Manual"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Command accepted",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Motor turned ON"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/soil-data": {
+      "get": {
+        "summary": "Get Soil Sensor Data",
+        "responses": {
+          "200": {
+            "description": "Soil data readings",
+            "content": {
+              "application/json": {
+                "example": {
+                  "sensor_1": 58.4,
+                  "sensor_2": 63.1,
+                  "sensor_3": 59.9,
+                  "average": 60.5
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
