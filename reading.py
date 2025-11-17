@@ -6,7 +6,7 @@ import os
 import sys
 
 # Use environment variable if set, otherwise default to local mongo
-MONGO_URI = os.getenv("mongodb+srv://vaishnavipithal_db_user:vaishnavi123@cluster0.1qcsetk.mongodb.net/?appName=Cluster0", "mongodb://localhost:27017")
+MONGO_URI = os.getenv("mongodb+srv://vaishnavipithal_db_user:vaishnavi123@cluster0.1qcsetk.mongodb.net/?appName=Cluster0")
 
 try:
     client = MongoClient("mongodb+srv://vaishnavipithal_db_user:vaishnavi123@cluster0.1qcsetk.mongodb.net/?appName=Cluster0")
